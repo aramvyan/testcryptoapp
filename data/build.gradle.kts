@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.testcryptoapp"
+    namespace = "com.example.testcryptoapp.data"
     compileSdk {
         version = release(36)
     }
@@ -32,6 +32,12 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+
+    implementation(files("libs/dynamic-sdk-android.aar"))
+    implementation(files("libs/solana-web3.aar"))
+    implementation(libs.sol4k)
+    implementation(libs.kotlinx.serialization.json)
+
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)

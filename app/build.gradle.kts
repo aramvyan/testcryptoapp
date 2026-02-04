@@ -41,6 +41,33 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    // Core SDK (required)
+    implementation(files("libs/dynamic-sdk-android.aar"))
+
+    // Solana SDK (optional - remove if not needed)
+    implementation(files("libs/solana-web3.aar"))
+    implementation(libs.sol4k)  // Required by Dynamic Solana SDK
+
+    // JSON serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Android WebView
+    implementation(libs.androidx.webkit)
+
+    // HTTP client
+    //noinspection UseTomlInstead
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
+
+    // Custom Tabs for authentication
+    implementation(libs.androidx.browser)
+
+    // Secure storage - DataStore + Tink
+    implementation(libs.androidx.datastore.preferences)
+    //noinspection UseTomlInstead
+    implementation("com.google.crypto.tink:tink-android:1.20.0")
+
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -49,8 +76,12 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.core)
+    implementation(libs.androidx.compose.material.icons.extended)
 
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+
     implementation(libs.koin.androidx.compose)
 
     implementation(libs.androidx.navigation.compose)
