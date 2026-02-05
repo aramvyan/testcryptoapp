@@ -44,7 +44,8 @@ data/  SDK integration, repositories, data sources
 - Add secrets.properties to .gitignore
 
 ##  ScreenShots
-(https://github.com/user-attachments/assets/9fcebb2b-f587-4439-a08e-63eb2bd1ba31)
+![telegram-cloud-photo-size-2-5197715468700029321-y](https://github.com/user-attachments/assets/af4d7f4d-af2c-4159-ae1d-e08d586982cd)
+
 
 
 
