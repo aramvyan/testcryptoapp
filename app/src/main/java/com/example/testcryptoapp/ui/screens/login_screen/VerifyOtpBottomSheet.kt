@@ -83,6 +83,12 @@ fun VerifyOtpBottomSheet(
 
     LaunchedEffect(isVerifying) {
         if (!isVerifying) return@LaunchedEffect
+
+         try {
+            onVerify(code())
+        } catch (_: Exception) {
+            false
+        }
         isVerifying = false
     }
 
@@ -98,7 +104,6 @@ fun VerifyOtpBottomSheet(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Title
             Text(
                 text = "Verify Email",
                 fontSize = 24.sp,
