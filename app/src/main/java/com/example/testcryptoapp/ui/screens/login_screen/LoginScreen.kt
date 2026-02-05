@@ -91,10 +91,16 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         PrimaryButton(
-            label = if (uiState.isLoading) "Sending..." else "Send Email OTP",
             enabled = uiState.email.isNotEmpty() && !uiState.isLoading,
             onClick = { onSendOtp(uiState.email) }
-        )
+        ) {
+            Text(
+                text = if (uiState.isLoading) "Sending..." else "Send Email OTP",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.White
+            )
+        }
 
         if (uiState.isLoading) {
             Spacer(modifier = Modifier.height(16.dp))
