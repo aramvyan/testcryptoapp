@@ -15,7 +15,7 @@ data/  SDK integration, repositories, data sources
 
 ####  App (UI Layer)
 - Jetpack Compose UI
-- Navigation using `NavHost`
+- Navigation using `Jetpack Navigation`
 - ViewModels
 - UI state management via `StateFlow`
 - Displays loading, success, and error states
