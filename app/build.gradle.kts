@@ -1,6 +1,16 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+}
+
+val secretsFile = rootProject.file("secrets.properties")
+val secrets = Properties()
+
+if (secretsFile.exists()) {
+    secrets.load(FileInputStream(secretsFile))
 }
 
 android {
@@ -15,6 +25,12 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField(
+            "String",
+            "DYNAMIC_ENVIRONMENT_ID",
+            "\"${secrets.getProperty("DYNAMIC_ENVIRONMENT_ID", "")}\""
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

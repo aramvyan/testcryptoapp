@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val props = ClientProps(
-            environmentId = "3e219b76-dcf1-40ab-aad6-652c4dfab4cc",
+            environmentId = BuildConfig.DYNAMIC_ENVIRONMENT_ID,
             appName = "Test Crypto App",
             logLevel = LoggerLevel.DEBUG
         )
