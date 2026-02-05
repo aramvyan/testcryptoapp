@@ -60,11 +60,16 @@ class WalletRepositoryImpl(private val dynamicSDK: DynamicSDK) : WalletRepositor
         dynamicSDK.wallets.switchNetwork(wallet, sepoliaNetwork)
 
         val weiAmount: BigInteger = convertEthToWei(amount)
+        val client = dynamicSDK.evm.createPublicClient(chainId = 11155111)
+        val gasPrice = client.getGasPrice()
 
         val tx = EthereumTransaction(
             from = wallet.address,
             to = recipientAddress,
-            value = weiAmount
+            value = weiAmount,
+            gas = BigInteger.valueOf(21000),
+            maxFeePerGas = gasPrice * BigInteger.valueOf(2),
+            maxPriorityFeePerGas = gasPrice
         )
 
         val txHash = dynamicSDK.evm.sendTransaction(tx, wallet)
