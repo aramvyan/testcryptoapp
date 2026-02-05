@@ -40,6 +40,6 @@ data/  SDK integration, repositories, data sources
 ##  How to Run
 
 - Create **secrets.properties** in the project root
-- - DYNAMIC_ENVIRONMENT_ID=your_environment_id_here
+-  DYNAMIC_ENVIRONMENT_ID=your_environment_id_here
 - Add secrets.properties to .gitignore
 
