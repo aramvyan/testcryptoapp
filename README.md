@@ -43,3 +43,8 @@ data/  SDK integration, repositories, data sources
 -  DYNAMIC_ENVIRONMENT_ID=your_environment_id_here
 - Add secrets.properties to .gitignore
 
+##  ScreenShots
+(https://github.com/user-attachments/assets/9fcebb2b-f587-4439-a08e-63eb2bd1ba31)
+
+
+
