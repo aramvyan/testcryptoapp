@@ -6,7 +6,7 @@ import com.example.testcryptoapp.repositories.AuthRepository
 class ResendEmailOTPUseCase(
     private val authRepository: AuthRepository
 ) {
-    suspend operator fun invoke(email: String): AuthResult<Unit> {
+    suspend operator fun invoke(email: String): AuthResult {
         return authRepository.resendEmailOTP(email)
     }
 }

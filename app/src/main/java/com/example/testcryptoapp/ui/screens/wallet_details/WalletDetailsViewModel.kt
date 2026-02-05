@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testcryptoapp.ui_models.WalletDetailsState
 import com.example.testcryptoapp.ui_models.toWalletDetailsUi
-import com.example.testcryptoapp.use_case.GetWalletUseCase
+import com.example.testcryptoapp.use_case.ObserveWalletUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class WalletDetailsViewModel(
-    private val getWalletUseCase: GetWalletUseCase
+    private val observeWalletUseCase: ObserveWalletUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(WalletDetailsState())
@@ -28,7 +28,7 @@ class WalletDetailsViewModel(
         viewModelScope.launch {
             _state.update { it.copy(isRefreshing = true, error = null) }
             try {
-                val wallet = getWalletUseCase()
+                val wallet = observeWalletUseCase()
                 _state.update {
                     it.copy(
                         isRefreshing = false,

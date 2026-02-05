@@ -6,7 +6,7 @@ import com.example.testcryptoapp.repositories.AuthRepository
 class SendEmailOTPUseCase(
     private val authRepository: AuthRepository
 ) {
-    suspend operator fun invoke(email: String): AuthResult<Unit> {
+    suspend operator fun invoke(email: String): AuthResult {
         if (!isValidEmail(email)) {
             return AuthResult.Error("Invalid email format")
         }

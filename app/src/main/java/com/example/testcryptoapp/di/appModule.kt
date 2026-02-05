@@ -17,7 +17,7 @@ val appModule = module {
     }
 
     viewModel {
-        WalletDetailsViewModel(getWalletUseCase = get())
+        WalletDetailsViewModel(observeWalletUseCase = get())
     }
     viewModel { SendTransactionViewModel(sendTxUseCase = get()) }
 }

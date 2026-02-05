@@ -5,8 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface AuthRepository {
-    suspend fun sendEmailOTP(email: String): AuthResult<Unit>
-    suspend fun verifyEmailOTP(email: String, code: String): AuthResult<String>
-    suspend fun resendEmailOTP(email: String): AuthResult<Unit>
+    suspend fun sendEmailOTP(email: String): AuthResult
+    suspend fun verifyEmailOTP(email: String, code: String): AuthResult
+    suspend fun resendEmailOTP(email: String): AuthResult
     fun isAuthenticated(): Flow<Boolean>
 }

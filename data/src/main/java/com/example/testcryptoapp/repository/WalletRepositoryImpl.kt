@@ -3,6 +3,7 @@ package com.example.testcryptoapp.repository
 import com.dynamic.sdk.android.Chains.EVM.EthereumTransaction
 import com.dynamic.sdk.android.Chains.EVM.convertEthToWei
 import com.dynamic.sdk.android.DynamicSDK
+import com.dynamic.sdk.android.Models.BaseWallet
 import com.dynamic.sdk.android.Models.Network
 import com.example.testcryptoapp.model.TxStatus
 import com.example.testcryptoapp.model.WalletModel
@@ -15,29 +16,35 @@ import kotlinx.serialization.json.JsonPrimitive
 import java.math.BigInteger
 
 class WalletRepositoryImpl(private val dynamicSDK: DynamicSDK) : WalletRepository {
-    override fun getWallet(): Flow<WalletModel> = flow {
-        val wallet = dynamicSDK.wallets.userWallets
+    override fun observeWallet(): Flow<WalletModel> = flow {
+        dynamicSDK.wallets.userWallets
             .firstOrNull { it.chain == "EVM" }
-            ?: throw IllegalStateException("EVM wallet not found")
+            ?.let { wallet ->
+                emit(loadWallet(wallet))
+            }
+        dynamicSDK.wallets.userWalletsChanges.collect { wallets ->
+            val wallet = wallets.firstOrNull { it.chain == "EVM" }
+            if (wallet != null) {
+                emit(loadWallet(wallet))
+            }
+        }
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun loadWallet(wallet: BaseWallet): WalletModel {
         val sepoliaNetwork = Network(JsonPrimitive(11155111))
         dynamicSDK.wallets.switchNetwork(wallet, sepoliaNetwork)
 
-        val network = dynamicSDK.networks.evm
-        val genericNetwork = network.find { it.name == "Sepolia" }
-        val chainId = genericNetwork?.chainId.toString()
-        val networkName = genericNetwork?.name
+        val network = dynamicSDK.networks.evm.find { it.name == "Sepolia" }
         val balance = dynamicSDK.wallets.getBalance(wallet)
 
-        emit(
-            WalletModel(
-                address = wallet.address,
-                balance = balance,
-                chain = chainId,
-                walletProvider = wallet.chain,
-                walletName = networkName
-            )
+        return WalletModel(
+            address = wallet.address,
+            balance = balance,
+            chain = network?.chainId.toString(),
+            walletProvider = wallet.chain,
+            walletName = network?.name
         )
-    }.flowOn(Dispatchers.IO)
+    }
 
     override fun sendTransaction(
         recipientAddress: String,

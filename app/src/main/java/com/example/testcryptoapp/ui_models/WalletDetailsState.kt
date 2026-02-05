@@ -4,6 +4,7 @@ import com.example.testcryptoapp.model.WalletModel
 
 data class WalletDetailsState(
     val isRefreshing: Boolean = false,
+    val isCreatingWallet: Boolean = false,
     val ui: WalletDetailsUi? = null,
     val error: String? = null
 )

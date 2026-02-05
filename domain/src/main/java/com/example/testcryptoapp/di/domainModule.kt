@@ -1,6 +1,6 @@
 package com.example.testcryptoapp.di
 
-import com.example.testcryptoapp.use_case.GetWalletUseCase
+import com.example.testcryptoapp.use_case.ObserveWalletUseCase
 import com.example.testcryptoapp.use_case.ResendEmailOTPUseCase
 import com.example.testcryptoapp.use_case.SendEmailOTPUseCase
 import com.example.testcryptoapp.use_case.SendTransactionUseCase
@@ -13,6 +13,6 @@ val domainModule = module {
     factory { VerifyEmailOTPUseCase(get()) }
     factory { ResendEmailOTPUseCase(get()) }
     factory { UserCheckUseCase(get()) }
-    factory { GetWalletUseCase(get()) }
+    factory { ObserveWalletUseCase(get()) }
     factory { SendTransactionUseCase(get()) }
 }

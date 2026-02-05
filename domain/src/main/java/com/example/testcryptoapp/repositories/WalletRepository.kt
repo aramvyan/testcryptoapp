@@ -5,6 +5,6 @@ import com.example.testcryptoapp.model.WalletModel
 import kotlinx.coroutines.flow.Flow
 
 interface WalletRepository {
-    fun getWallet(): Flow<WalletModel>
+    fun observeWallet(): Flow<WalletModel>
     fun sendTransaction(recipientAddress: String, amount: String): Flow<TxStatus>
 }
